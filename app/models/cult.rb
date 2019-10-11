@@ -8,7 +8,7 @@ class Cult
         @location = location
         @founding_year = founding_year
         @slogan = slogan
-        @@all << self
+        self.all << self
     end
 
     def recruit_follower(follower)
