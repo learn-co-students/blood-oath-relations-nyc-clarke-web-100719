@@ -30,6 +30,7 @@ class Follower
     def my_cults_slogans
         cults.each do |bloodoath|
             p bloodoath.cult.slogan
+            bloodoath.cult.slogan
         end
     end
 

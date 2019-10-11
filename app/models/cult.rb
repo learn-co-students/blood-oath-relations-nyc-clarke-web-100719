@@ -31,8 +31,8 @@ class Cult
         @@all.find {|cult| cult.name == name}
     end
 
-    def self.find_by_location(location)
-        @@all.select {|cult| cult.location == location}
+    def self.find_by_location(locale)
+        @@all.select {|cult| cult.location == locale}
     end
 
     def self.find_by_founding_year(founding_year)
@@ -51,7 +51,7 @@ class Cult
         avg = (sum_of_ages/cult_population.to_f)
     end
 
-    def my_followers_motto
+    def my_followers_mottos
         followers.each do |bloodoath_instance|
             p bloodoath_instance.follower.life_motto
         end
