@@ -1,12 +1,13 @@
 class Follower
     @@all = []
     attr_accessor :name, :age, :life_motto
-
+    attr_reader :pay_wall
     def initialize(name, age)
         @name = name
         @age = age
         @life_motto = ""
         self.class.all << self
+        @pay_wall = false
     end
 
     def self.all
@@ -36,6 +37,10 @@ class Follower
     def self.top_ten
         temp = all.sort_by{|follower| -follower.cults.count}.reject{|follower|follower.cults.count < 1}
         temp[0...9]
+    end
+
+    def fellow_cult_members
+        cults.map{|cult| cult.followers}.flatten.uniq
     end
 
 end
