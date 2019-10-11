@@ -11,7 +11,7 @@ class BloodOath
     def initialize(follower, cult)
         @follower = follower
         @cult = cult
-        @date = Time.now.strftime("%Y/%m/%d")
+        @date = Time.now.strftime("%Y-%m-%d")
         self.class.all << self
     end
 
@@ -19,5 +19,8 @@ class BloodOath
         self.date
     end
 
+    def self.first_oath
+        all[0].follower
+    end
 
 end

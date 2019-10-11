@@ -25,4 +25,17 @@ class Follower
         all.select{|follower| follower.age == age}
     end
 
+    def my_cults_slogans
+        cults.map{|cult| cult.slogan}
+    end
+    
+    def self.most_active
+        all.max_by{|follower| follower.cults.count}
+    end
+
+    def self.top_ten
+        temp = all.sort_by{|follower| -follower.cults.count}.reject{|follower|follower.cults.count < 1}
+        temp[0...9]
+    end
+
 end

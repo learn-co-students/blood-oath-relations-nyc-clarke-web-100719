@@ -49,4 +49,35 @@ class Cult
         @year
     end
 
+    def average_age
+        ar_ages = followers.map{|follower| follower.age}
+        ages_sum = 0.0
+        ar_ages.each{|age| ages_sum += age }
+        ages_sum/ar_ages.length
+    end
+
+    def my_followers_mottos
+        followers.map{|follower| follower.life_motto}
+    end
+
+    def self.least_popular
+        least_followers = nil
+        least_like_cult = nil
+        all.each{|cult| 
+        if !least_followers
+            least_followers = cult.cult_population
+            least_like_cult = cult
+        elsif cult.cult_population <= least_followers
+            least_followers = cult.cult_population
+            least_like_cult = cult
+        end
+        }
+        least_like_cult
+    end
+
+    def self.most_common_location
+        temp = self.all.map{|cult| cult.location}
+        temp.max_by{|i| temp.count(i)}
+    end
+
 end
