@@ -1,15 +1,15 @@
 require 'date'
 
 class BloodOath
-    attr_accessor :init_date, :cult, :follower
+    attr_accessor :initiation_date, :cult, :follower
 
     @@all = []
 
-    def initialize(cult, follower, init_date=DateTime.now.strftime("%F"))
+    def initialize(cult, follower, initiation_date=DateTime.now.strftime("%F"))
         @cult = cult
         @follower = follower
-        @init_date = init_date
-        self.all << self
+        @initiation_date = initiation_date
+        self.class.all << self
     end
 
     def self.all

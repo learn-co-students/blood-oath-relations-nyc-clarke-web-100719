@@ -19,7 +19,11 @@ class Follower
     end
 
     def join_cult(cult)
-        BloodOath.new(cult, self)
+        if cult.minimum_age > self.age
+            puts "#{self.name}, you are too young!"
+        else 
+            BloodOath.new(cult, self)
+        end
     end
 
     def cult_count #returns the number of cults the follower has joined
@@ -28,6 +32,16 @@ class Follower
 
     def my_cults_slogans
         cults.each { |cult| puts cult.slogan }
+    end
+
+    def fellow_cult_members
+        fellow_members = self.cults.reduce([]) do |array, cult|
+            cult.followers.each do |follower| 
+                array << follower unless follower == self  
+            end
+            array
+        end
+        fellow_members.uniq
     end
 
     def self.all
