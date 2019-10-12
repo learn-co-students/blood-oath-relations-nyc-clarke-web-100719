@@ -15,7 +15,13 @@ class Follower
     end
 
     def join_cult(cult)
-        BloodOath.new(self, cult)
+        if pay_wall
+            return BloodOath.new(self, cult) if self.age >= cult.minimum_age
+            puts "Too young to join to cult"
+        else
+            puts "No minimum_age feature is active need to pay for these"
+            BloodOath.new(self, cult)  
+        end 
     end
 
     def cults
@@ -40,7 +46,13 @@ class Follower
     end
 
     def fellow_cult_members
-        cults.map{|cult| cult.followers}.flatten.uniq
+        return cults.map{|cult| cult.followers}.flatten.uniq.reject{|follower| follower == self} if pay_wall
+        "You need to pay for this feature"
     end
 
+    def paying_for_features(value = 0)
+        @pay_wall = true if value >= 400
+        return "New Features active - Pay_wall down" if @pay_wall
+        "These Features are only avalible after playing at least 400"
+    end
 end

@@ -1,6 +1,7 @@
 class Cult
 
     attr_accessor :name, :location, :slogan, :followers, :year
+    attr_reader :pay_wall
     @@all =[]
 
     def self.all
@@ -11,12 +12,20 @@ class Cult
         @name = name
         @location = location
         @slogan = ""
+        @pay_wall = false
+        @minimum_age = rand(32)+18
         @year = rand(1990) + 1
         self.class.all << self
     end
 
     def recruit_follower(follower)
-        BloodOath.new(follower,self)
+        if pay_wall
+            return BloodOath.new(follower,self) if follower.age >= minimum_age
+            print "Person does not meet minimum age requirement: #{minimum_age} \nYour age is #{follower.age}"
+        else
+            puts "if you want to add minimum_age feature you will need to Pay for these"
+            BloodOath.new(follower,self)
+        end
     end
 
     def cult_population
@@ -78,6 +87,17 @@ class Cult
     def self.most_common_location
         temp = self.all.map{|cult| cult.location}
         temp.max_by{|i| temp.count(i)}
+    end
+
+    def paying_for_features(value = 0)
+        @pay_wall = true if value >= 800
+        return "New Features active - Pay_wall down" if @pay_wall
+        "These Features are only avalible after playing at least 800"
+    end
+
+    def minimum_age
+        return @minimum_age if pay_wall
+        puts "These Features are only avalible after playing at least 800"
     end
 
 end

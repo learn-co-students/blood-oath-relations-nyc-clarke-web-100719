@@ -45,6 +45,8 @@ bo10 = BloodOath.new(follower6,cult1)
 bo11 = BloodOath.new(follower7,cult11)
 bo12= BloodOath.new(follower8,cult7)
 
+#pay_wall has flaw as is adquire as folower but not cult those methods are not avalibe as to get in to minimum_age method
+
 binding.pry
 
 puts "Mwahahaha!" # just in case pry is buggy and exits
