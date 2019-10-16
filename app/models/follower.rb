@@ -10,8 +10,12 @@ class Follower
         @@all << self
     end
 
-    def cults
+    def bloodoaths
         BloodOath.all.select {|bloodoath| bloodoath.follower == self}
+    end
+
+    def cults
+        bloodoaths.map {|bloodoath| bloodoath.cult}
     end
 
     def join_cult(cult)
